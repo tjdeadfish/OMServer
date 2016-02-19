@@ -32,13 +32,16 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
     'django.contrib.admin',
+    'django.contrib.admindocs',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'tools',
     'bootstrap_toolkit',
+    'tools',
+    'tongji',
+    'db_manage',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -88,11 +91,23 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates').replace('\\', '/'),
 )
+
+MEDIA_URL = '/images/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'images').replace('\\','/')
+
+#CKEDITOR_UPLOAD_PATH = 'uploads/'
+
+#CKEDITOR_ALLOW_NONIMAGE_FILES = False
+
+#CKEDITOR_IMAGE_BACKEND = "pillow"
+
 #设置session有效期
 SESSION_COOKIE_AGE = 60*30
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
