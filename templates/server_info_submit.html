@@ -1,0 +1,50 @@
+<link href="/static/OMServer/css/style_css.css" rel="stylesheet" type="text/css" />
+{% extends "index.html" %}
+{% block content %}
+<form action="/tongji/submit/" method="post" id="form1" name="form1">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td>服务器外网IP地址：</td>
+            <td>{{ form.server_external_ip }}</td>
+            <td>{{ form.server_external_ip.errors }}</td>
+        </tr>
+        <tr>
+            <td>服务器内网IP地址：</td>
+            <td>{{ form.server_internal_ip }}</td>
+            <td>{{ form.server_internal_ip.errors }}</td>
+        </tr>
+        <tr>
+            <td>服务器管理员帐号：</td>
+            <td>{{ form.server_admin }}</td>
+            <td>{{ form.server_admin.errors }}</td>
+        </tr>
+        <tr>
+            <td>服务器管理员密码：</td>
+            <td>{{ form.server_password }}</td>
+            <td>{{ form.server_password.errors }}</td>
+        </tr>
+        <tr>
+            <td>服务器主机名：</td>
+            <td>{{ form.server_hostname }}</td>
+            <td>{{ form.server_hostname.errors }}</td>
+        </tr>
+        <tr>
+            <td>服务器ssh端口：</td>
+            <td>{{ form.server_port }}</td>
+            <td>{{ form.server_port.errors }}</td>
+        </tr>
+        <tr>
+            <td>服务器操作系统：</td>
+            <td>{{ form.server_os }}</td>
+            <td>{{ form.server_os.errors }}</td>
+        </tr>
+        <tr>
+            <td>供应商：</td>
+            <td>{{ form.provider }}</td>
+            <td>{{ form.provider.errors }}</td>
+        </tr>
+    </table>
+    <input type="submit" value="提交" /></p></div>
+</form>
+{% endblock %}

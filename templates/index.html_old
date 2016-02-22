@@ -1,0 +1,80 @@
+{% load bootstrap_toolkit %}
+<!DOCTYPE html>
+<html lang="en-us" >
+<head>
+<title>Site administration | Django site admin</title>
+<link rel="stylesheet" type="text/css" href="/static/admin/css/base.css" />
+<link rel="stylesheet" type="text/css" href="/static/admin/css/dashboard.css" />
+<!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="/static/admin/css/ie.css" /><![endif]-->
+
+<script type="text/javascript">window.__admin_media_prefix__ = "/static/admin/";</script>
+<script type="text/javascript">window.__admin_utc_offset__ = "0";</script>
+
+<meta name="robots" content="NONE,NOARCHIVE" />
+</head>
+<div id="container">
+    <!-- Header -->
+    <div id="header">
+        <div id="branding">
+        <h1 id="site-name"><a href="/index/">乐蜀运维平台</a></h1>
+        </div>
+        <div id="user-tools">
+                Welcome,
+                <strong>{{ username }}</strong>.
+                <a href="/accounts/changepassword/">Change password</a> /
+                <a href="/accounts/logout/">Log out</a>
+
+        </div>
+    </div>
+    <!-- END Header -->
+<body class=" dashboard">
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+        <div class="header">
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a class="pure-button" href="/tongji/">资产统计</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="pure-button" href="/deploy/">环境部署</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="pure-button" href="/admin/db_manage/">数据库管理</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="pure-button" href="/release/">代码发布</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="pure-button" href="/terminal/">终端</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="pure-button" href="/log_analyze/">日志分析</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="pure-button" href="/monitor">监控</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            {% block content %}
+            {% endblock %}
+            <div class="footer">
+                <div class="pure-menu pure-menu-horizontal pure-menu-open">
+                    <ul>
+                        <li><a href="http://pythonic.in/about/">About Me</a></li>
+                        <li><a href="http://pythonic.in/Friendship/">Friendship</a></li>
+                        <li><a href="https://github.com/lvs071103/JackBlog">GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

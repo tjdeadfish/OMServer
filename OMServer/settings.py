@@ -67,7 +67,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'OMServer',
         'USER': 'root',
-        'PASSWORD': 'LVS@071103',
+        'PASSWORD': 'yz2+laZQY7dwDkMZmT9M',
         'HOST': '',
         'PORT': '',
     }
