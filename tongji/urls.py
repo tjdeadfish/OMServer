@@ -1,8 +1,10 @@
 from django.conf.urls import *
-from tongji.views import server_info_display
-from tongji.views import server_info_submit
+from tongji import views
+
 
 urlpatterns = patterns('',
-    url(r'^$', server_info_display),
-    url(r'^submit/$', server_info_submit),
+    url(r'^$', views.server_list, name='server_list'),
+    url(r'^new/$', views.server_create, name='server_new'),
+    url(r'edit/(?P<pk>\d+)$', views.server_update, name='server_edit'),
+    url(r'delete/(?P<pk>\d+)$', views.server_delete, name='server_delete'),
 )

@@ -1,0 +1,14 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="page_function">
+    <div class="info">
+        <h3>服务器信息删除：</h3>
+        <small>感谢您奔腾不息的工作</small>
+    </div>
+    <div>
+        {% for id in server_id_list %}
+            {{ id }}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

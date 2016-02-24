@@ -60,10 +60,10 @@ def changepassword(request):
             form = ChangePasswordForm(request.POST)
             if form.is_valid():
                 username = request.user.username
-                print username
+                #print username
                 #old_password = request.POST.get('old_password', '')
                 old_password = form.cleaned_data['old_password']
-                print old_password
+                #print old_password
                 user = auth.authenticate(username=username, password=old_password)
                 print user
                 if user is not None:

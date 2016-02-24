@@ -1,7 +1,6 @@
-<link href="/static/OMServer/css/style_css.css" rel="stylesheet" type="text/css" />
 {% extends "index.html" %}
 {% block content %}
-<form action="/tongji/submit/" method="post" id="form1" name="form1">
+<form action="/index/tongji/submit/" method="post" id="form1" name="form1">
     {% csrf_token %}
     <table>
         <tr>
@@ -45,6 +44,6 @@
             <td>{{ form.provider.errors }}</td>
         </tr>
     </table>
-    <input type="submit" value="提交" /></p></div>
+    <p><input type="submit" value="提交" /></p>
 </form>
 {% endblock %}

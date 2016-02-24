@@ -1,0 +1,51 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="page_function">
+    <div class="info">
+        <h3>服务器信息修改：</h3>
+        <small>感谢您奔腾不息的工作</small>
+    </div>
+        <form action="/index/tongji/modify/?server_id={{ items.id }}" method="post" id="form" name="form">
+        {% csrf_token %}
+            {% if items %}
+            <table>
+                <tr>
+                    <td>服务器外网IP地址：</td>
+                    <td><input type="text" name="external_ip" value="{{ items.server_external_ip }}"></td>
+                </tr>
+                <tr>
+                    <td>服务器内网IP地址：</td>
+                    <td><input type="text" name="internal_ip" value="{{ items.server_internal_ip }}"></td>
+                </tr>
+                <tr>
+                    <td>服务器管理员帐号：</td>
+                    <td><input type="text" name="account" value="{{ items.server_admin }}"></td>
+                </tr>
+                <tr>
+                    <td>服务器管理员密码：</td>
+                    <td><input type="text" name="password" value="{{ items.server_password }}"></td>
+                </tr>
+                <tr>
+                    <td>服务器主机名：</td>
+                    <td><input type="text" name="hostname" value="{{ items.server_hostname }}"></td>
+                </tr>
+                <tr>
+                    <td>服务器ssh端口：</td>
+                    <td><input type="text" name="ssh_port" value="{{ items.server_port }}"></td>
+                </tr>
+                <tr>
+                    <td>服务器操作系统：</td>
+                    <td><input type="text" name="os" value="{{ items.server_os }}"></td>
+                </tr>
+                <tr>
+                    <td>供应商：</td>
+                    <td><input type="text" name="provider" value="{{ items.provider }}"></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="修改"/></td>
+                </tr>
+            </table>
+            {% endif %}
+    </form>
+</div>
+{% endblock %}

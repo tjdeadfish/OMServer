@@ -10,7 +10,7 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^tongji/', include('tongji.urls')),
+    url(r'^index/tongji/', include('tongji.urls')),
     url(r'^accounts/login/$', 'tools.views.login'),
     url(r'^accounts/logout/$', 'tools.views.logout'),
     url(r'^accounts/changepassword/$', 'tools.views.changepassword'),

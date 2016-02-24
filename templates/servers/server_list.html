@@ -1,0 +1,46 @@
+{% extends "index.html" %}
+{% block content %}
+    <div class="page_function">
+        <div class="info">
+            <h3>servers：</h3>
+            <small>感谢您奔腾不息的工作</small>
+        </div>
+        <div class="exercise">
+            <a href="{% url "server_new" %}">新增</a>
+        </div>
+    </div>
+    <div class="page_form">
+        <div class="page_tablekk table_list">
+            <!--<form action="index.php?m=admin_game_dele" method="post" name="setDell" id="setDell">-->
+            <table align="center" width="100%" border="0" cellspacing="0" cellpadding="0" id="contenttable">
+                <tr class="t" align="left">
+                    <td width="5%">ID</td>
+                    <td width="10%">主机名</td>
+                    <td width="10%">外网ip</td>
+                    <td width="10%">内网ip</td>
+                    <td width="10%">管理员</td>
+                    <td width="10%">密码</td>
+                    <td width="20%">操作系统</td>
+                    <td width="10%">ssh端口</td>
+                    <td width="10%">接入商</td>
+                    <td width="5%">操作</td>
+                </tr>
+                {% for server in object_list %}
+                <tr>
+                    <td>{{ server.id }}
+                    <td>{{ server.server_hostname }}</td>
+                    <td>{{ server.server_external_ip }}</td>
+                    <td>{{ server.server_internal_ip }}</td>
+                    <td>{{ server.server_admin }}</td>
+                    <td>{{ server.server_password }}</td>
+                    <td>{{ server.server_os }}</td>
+                    <td>{{ server.server_port }}</td>
+                    <td>{{ server.provider }}</td>
+                    <td><a href="{% url "server_edit" server.id %}">修改</a>
+                    <a href="{% url "server_delete" server.id %}">删除</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}

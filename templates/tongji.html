@@ -1,31 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<link href="/static/OMServer/css/style_css.css" rel="stylesheet" type="text/css" />
 {% extends "index.html" %}
 {% block content %}
-<head>
-    <meta charset="UTF-8">
-    <title>统计</title>
-</head>
-<body>
-<div class="page_function">
-  <div class="info">
-    <h3>服务器信息：</h3>
-    <small>感谢您奔腾不息的工作</small>
-  </div>
-    <div class="exercise">
-        <a href="/tongji/submit/">添加</a> <a href="index.php?m=admin_gamelink_checklink">删除</a>
+    <div class="page_function">
+        <div class="info">
+            <h3>服务器信息：</h3>
+            <small>感谢您奔腾不息的工作</small>
+        </div>
+        <div class="exercise">
+            <a href="/index/tongji/submit/">添加</a> <a href="javascript:void(0);" onclick="audit_recom();">删除</a>
+        </div>
     </div>
-</div>
-<div class="page_form">
-    <div class="page_tablekk table_list">
-        <!--<form action="index.php?m=admin_game_dele" method="post" name="setDell" id="setDell">-->
+    <div class="page_form">
+        <div class="page_tablekk table_list">
+            <!--<form action="index.php?m=admin_game_dele" method="post" name="setDell" id="setDell">-->
             <table align="center" width="100%" border="0" cellspacing="0" cellpadding="0" id="contenttable">
                 <tr class="t" align="left">
-                    <td width="5%"><a href="javascript:void(0);" onclick="checkall();" id="checkhtml">全选</a></td>
+                    <td width="6%"><a href="javascript:void(0);" onclick="checkall();" id="checkhtml">全选</a></td>
                     <td width="5%">ID</td>
                     <td width="10%">主机名</td>
-                    <td width="15%">外网ip</td>
+                    <td width="14%">外网ip</td>
                     <td width="14%">内网ip</td>
                     <td width="10%">管理员</td>
                     <td width="10%">管理员密码</td>
@@ -34,20 +26,20 @@
                     <td width="11%">操作</td>
                 </tr>
                 {% for item in items %}
-                <tr>
-                     <td><input type="checkbox" value="{{ item.id }}" name="checkid[{{ item.id }}]" id="checkid_{{ item.id }}"></td>
-                     <td>{{ item.id }}</td>
-                     <td>{{ item.server_hostname }}</td>
-                     <td>{{ item.server_external_ip }}</td>
-                     <td>{{ item.server_internal_ip }}</td>
-                     <td>{{ item.server_admin }}</td>
-                     <td>{{ item.server_password }}</td>
-                     <td>{{ item.server_port }}</td>
-                     <td>{{ item.server_os }}</td>
-                     <td><a href="/tongji/modified&id={{ item.id }}">修改</a></td>
-                </tr>
+                    <tr>
+                        <td><input type="checkbox" value="{{ item.id }}" name="checkid[{{ item.id }}]" id="checkid_{{ item.id }}"></td>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.server_hostname }}</td>
+                        <td>{{ item.server_external_ip }}</td>
+                        <td>{{ item.server_internal_ip }}</td>
+                        <td>{{ item.server_admin }}</td>
+                        <td>{{ item.server_password }}</td>
+                        <td>{{ item.server_port }}</td>
+                        <td>{{ item.server_os }}</td>
+                        <td><a href="/index/tongji/modify/?server_id={{ item.id }}">修改</a></td>
+                    </tr>
                 {% endfor %}
-    </table>
+            </table>
+        </div>
+    </div>
 {% endblock %}
-</body>
-</html>

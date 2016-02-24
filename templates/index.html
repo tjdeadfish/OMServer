@@ -2,266 +2,109 @@
 {% load bootstrap_toolkit %}
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>leshu运维管理</title>
-<link href="/static/OMServer/css/style_css.css" rel="stylesheet" type="text/css" />
-<script src="/static/OMServer/js/base.js" type="text/javascript"></script>
-<!--<script src="http://www.9k9k.com/template/lsbox.js" type="text/javascript"></script>
-<script src="./style/common.js" type="text/javascript"></script>
-<script src="./style/datetime/WdatePicker.js" type="text/javascript"></script>
-<script language="javascript" type="text/javascript">
-
-	$(document).ready(function(){
-		$('#contenttable tr:nth-child(even)').addClass("banmacss");
-	});	
-
-</script>-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>leshu运维管理</title>
+    <link href="http://dev.pythonic.in/static/OMServer/css/style_css.css" rel="stylesheet" type="text/css" />
+    <script src="http://dev.pythonic.in/static/OMServer/js/base.js" type="text/javascript"></script>
 </head>
+
 <body>
 <div id="append_parent"></div>
-
 <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td height="50" colspan="2"><div id="head">
-        <!--<div id="logo"><img src="/style/logo.gif" width="180" height="50" /></div>-->
-		<div id="site-name"><a href="/index/">乐蜀运维平台</a></div>
-        <div id="tool">welcome <strong>{{ username }}</strong>!&nbsp;&nbsp; <a href="/accounts/logout/">Log out</a>&nbsp;&nbsp;&nbsp;<a href="dev.pythonic.in/accounts/login/" target="_blank">登陆首页</a> </div>
-      </div></td>
-  </tr>
-  <tr>
-    <td width="180" id="page_left" height="100%" align="left" valign="top">
-    <!--左边-->
-		<div id="nav" class="scroll-pane">
-			<div class="title"><a href="/index/">管理首页</a></div>
-			<ul class="load menu">
-							<li><a  href="/tongji/">资产统计</a></li>
-							<li><a  href="/deploy/">环境部署</a></li>
-							<li><a  href="/admin/db_manage/">数据库管理</a></li>
-							<li><a  href="/release/">代码发布</a></li>
-							<li><a  href="/terminal/">终端</a></li>
-							<li><a  href="/log_analyze/">日志分析</a></li>
-							<li><a  href="/monitor/">监控</a></li>
-						 
-			</ul>
-		</div>
-    </td>
-    <td height="100%" style="width:100%\9" align="left" valign="top"><script type="text/javascript">
+    <tr>
+        <td height="50" colspan="2"><div id="head">
+            <!--<div id="logo"><img src="/style/logo.gif" width="180" height="50" /></div>-->
+            <div id="site-name"><a href="/index/">乐蜀运维平台</a></div>
+            <div id="tool">
+                welcome <strong>{{ username }}</strong>!&nbsp;&nbsp;
+                <a href="/accounts/changepassword/">Change password</a>&nbsp;&nbsp;
+                <a href="/accounts/logout/">Log out</a>&nbsp;&nbsp;&nbsp;
+            </div>
+        </div>
+        </td>
+    </tr>
+    <tr>
+        <td width="180" id="page_left" height="100%" align="left" valign="top">
+            <!--左边-->
+            <div id="nav" class="scroll-pane">
+                <div class="title">
+                    <a href="/index/">管理首页</a></div>
+                <ul class="load menu">
+                    <li><a  href="/index/tongji/">资产统计</a></li>
+                    <li><a  href="/deploy/">环境部署</a></li>
+                    <li><a  href="/admin/db_manage/">数据库管理</a></li>
+                    <li><a  href="/release/">代码发布</a></li>
+                    <li><a  href="/terminal/">终端</a></li>
+                    <li><a  href="/log_analyze/">日志分析</a></li>
+                    <li><a  href="/monitor/">监控</a></li>
+                </ul>
+            </div>
+        </td>
 
-	function selparklist(){
-		var seltype			= $.trim($("#seltype").val());	
-		var seltypevalue	= $.trim($("#seltypevalue").val());
-		var starttime		= $.trim($("#starttime").val());
-		var endtime			= $.trim($("#endtime").val());
-		var nature			= $.trim($("#nature").val());
-		var url				= 'index.php?m=admin_gamelink';
-		
-		if (seltypevalue != '') {url += '&seltype='+seltype+'&seltypevalue='+encodeURIComponent(seltypevalue);}
-		if (starttime != '') {url += '&starttime='+starttime;}
-		if (endtime != '') {url += '&endtime='+endtime;}
-		if (nature != '') {url += '&nature='+nature;}
-		window.location.href=encodeURI(url);
-	}
-	var checkTag = 1; // 1:当前checkbox全部未选中 	2:全部选中
-	function checkall(){
-		if(checkTag == 1){
-			$("input[id^='checkid_']").attr("checked", true);
-			$("#checkhtml").html("全不选");
-			checkTag = 2;
-		}else{
-			$("input[id^='checkid_']").attr("checked", false);
-			$("#checkhtml").html("全选");
-			checkTag = 1;
-		}
-	}
+    <td height="100%" style="width:100%\9" align="left" valign="top">
 
-	function audit_recom(val){
-		if(val!=1) { showError('参数不对'); return false; }
-		var delid = '';
-		var spe = "";
-		$("input[id^='checkid_']:checked").each(function(){
-			delid += spe + $(this).val();
-			spe = ",";
-		});
-		var dof;
-		val == 1 ? dof = '设' : dof = '取消'; 
-		if(delid){
-			showError('确定'+dof+'ID为'+delid+'的游戏为推荐么？是否继续？', {canclebutton:true,oktype:'func', func:'audit_recom_ok', funcParam:'isrecom='+val+'&auditid='+delid});
-		}else{
-			showError('未选中任何数据');
-		}
-	}
-	function audit_recom_ok(val){
-		var url = 'index.php?m=admin_gamelink_recom&';
-		location.href = url + val;
-		//$("#setaudit").submit();
-	}
+    <script type="text/javascript">
 
+/*        function selparklist() {
+            var seltype			= $.trim($("#seltype").val());
+            var seltypevalue	= $.trim($("#seltypevalue").val());
+            var starttime		= $.trim($("#starttime").val());
+            var endtime			= $.trim($("#endtime").val());
+            var nature			= $.trim($("#nature").val());
+            var url				= 'index.php?m=admin_gamelink';
 
-</script>
-<!--<div class="page_function">
-  <div class="info">
-    <h3>游戏链接管理</h3>
-    <small>感谢您奔腾不息的工作</small>
-  </div>
-  <div class="exercise"> 
-	<a href="index.php?m=admin_gamelink_check">添加链接</a> <a href="index.php?m=admin_gamelink_checklink">检查连接</a> 
-  </div>
-</div>
-<div class="page_main">
-  <div class="page_menu">
-	<select name="seltype" id="seltype" class="leshu_a_select">
-	  <option value="gamename"  selected="selected"  >游戏名称</option>
-	  <option value="id"  >ID</option>
-	</select>
-	&nbsp;&nbsp;
-	<input name="seltypevalue" id="seltypevalue" type="text" class="text_value" style=" width:140px" value="九阴绝学" />
-	&nbsp;&nbsp;
-	添加时间
-	&nbsp;&nbsp;
-	<input name="starttime" id="starttime" type="text" class="text_value" style=" width:140px" value=""  onfocus="WdatePicker({startDate:'%y-%M-%D %H:%m:%s',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:false})"  />
-	&nbsp;&nbsp;
-	至
-	&nbsp;&nbsp;
-	<input name="endtime" id="endtime" type="text" class="text_value" style=" width:140px" value=""  onfocus="WdatePicker({startDate:'%y-%M-%D %H:%m:%s',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:false})"  />
-	&nbsp;&nbsp;
-	<input type="button" class="leshu_a_b2" value="查询" onclick="javascript:selparklist();" />
-	<!--select name="nature" id="nature" onchange="javascript:selparklist();">
-		<option value="0">状态</option>
-				<option value="1" >启用</option>
-				<option value="2" >停止</option>
-		    </select-->
-  </div>
-<!--</div>
-<div class="page_form">
-	<div class="page_tablekk table_list">
-		<form action="index.php?m=admin_game_dele" method="post" name="setDell" id="setDell">
-            <table align="center" width="100%" border="0" cellspacing="0" cellpadding="0" id="contenttable">
-              <tr class="t" align="left">
-                <td width="5%"><a href="javascript:void(0);" onclick="checkall();" id="checkhtml">全选</a></td>
-                <td width="5%">ID</td>
-                <td width="10%">游戏名称</td>
-                <td width="7%">平台</td>
-                <td width="18%">官网地址</td>
-                <td width="18%">注册地址</td>
-                <td width="6%">推荐</td>
-                <td width="14%">添加时间</td>
-                <td width="11%">操作</td>
-              </tr>
-                            <tr align="left">
-                <td><input type="checkbox" value="23766" name="checkid[23766]" id="checkid_23766"></td>
-                <td>23766</td>
-                <td>九阴绝学</td>
-                <td>16768</td>
-                <td>http://jyjx.16768.com/</td>
-                <td>http://jyjx.16768.com/</td>
-                <td>否</td>
-                <td>2016-01-22 13:11:15</td>
-                <td><a href="index.php?m=admin_gamelink_addlink&plateid=3150">修改</a></td>
-               </tr>
-                            <tr align="left">
-                <td><input type="checkbox" value="23756" name="checkid[23756]" id="checkid_23756"></td>
-                <td>23756</td>
-                <td>九阴绝学</td>
-                <td>甲壳虫游戏</td>
-                <td>http://www.wan696.com/g/jyjx</td>
-                <td>http://www.wan696.com/g/jyjx</td>
-                <td>否</td>
-                <td>2016-01-21 15:17:31</td>
-                <td><a href="index.php?m=admin_gamelink_addlink&plateid=3488">修改</a></td>
-               </tr>
-                            <tr align="left">
-                <td><input type="checkbox" value="23748" name="checkid[23748]" id="checkid_23748"></td>
-                <td>23748</td>
-                <td>九阴绝学</td>
-                <td>迅雷牛X页游</td>
-                <td>http://jyjx.niu.xunlei.com/</td>
-                <td>http://jyjx.niu.xunlei.com/</td>
-                <td>否</td>
-                <td>2016-02-03 19:24:20</td>
-                <td><a href="index.php?m=admin_gamelink_addlink&plateid=734">修改</a></td>
-               </tr>
-                            <tr align="left">
-                <td><input type="checkbox" value="23747" name="checkid[23747]" id="checkid_23747"></td>
-                <td>23747</td>
-                <td>九阴绝学</td>
-                <td>2133</td>
-                <td>http://jyjx.2133.com/</td>
-                <td>http://jyjx.2133.com/</td>
-                <td>否</td>
-                <td>2016-01-28 18:07:57</td>
-                <td><a href="index.php?m=admin_gamelink_addlink&plateid=210">修改</a></td>
-               </tr>
-                            <tr align="left">
-                <td><input type="checkbox" value="23733" name="checkid[23733]" id="checkid_23733"></td>
-                <td>23733</td>
-                <td>九阴绝学</td>
-                <td>快玩游戏</td>
-                <td>http://jyjx.teeqee.com/</td>
-                <td>http://jyjx.teeqee.com/</td>
-                <td>否</td>
-                <td>2016-01-25 18:46:41</td>
-                <td><a href="index.php?m=admin_gamelink_addlink&plateid=193">修改</a></td>
-               </tr>
-                            <tr align="left">
-                <td><input type="checkbox" value="23673" name="checkid[23673]" id="checkid_23673"></td>
-                <td>23673</td>
-                <td>九阴绝学</td>
-                <td>搜狗游戏</td>
-                <td>http://wan.sogou.com/608/</td>
-                <td>http://wan.sogou.com/608/</td>
-                <td>否</td>
-                <td>2016-01-29 14:45:32</td>
-                <td><a href="index.php?m=admin_gamelink_addlink&plateid=220">修改</a></td>
-               </tr>
-                            <tr align="left">
-                <td><input type="checkbox" value="23643" name="checkid[23643]" id="checkid_23643"></td>
-                <td>23643</td>
-                <td>九阴绝学</td>
-                <td>9377</td>
-                <td>http://jyjx.9377.com/</td>
-                <td>http://jyjx.9377.com/</td>
-                <td>否</td>
-                <td>2016-01-19 13:40:46</td>
-                <td><a href="index.php?m=admin_gamelink_addlink&plateid=156">修改</a></td>
-               </tr>
-                            <tr align="left">
-                <td><input type="checkbox" value="23635" name="checkid[23635]" id="checkid_23635"></td>
-                <td>23635</td>
-                <td>九阴绝学</td>
-                <td>51wan</td>
-                <td>http://hd.51wan.com/u.php?a=42229&b=22815&c=1248</td>
-                <td>http://hd.51wan.com/u.php?a=42229&b=22815&c=1248</td>
-                <td>否</td>
-                <td>2016-01-29 15:33:09</td>
-                <td><a href="index.php?m=admin_gamelink_addlink&plateid=35">修改</a></td>
-               </tr>
-                            <tr align="left">
-                <td><input type="checkbox" value="23471" name="checkid[23471]" id="checkid_23471"></td>
-                <td>23471</td>
-                <td>九阴绝学</td>
-                <td>哥们网</td>
-                <td>http://nknkjyjx.r.thetianfu.com/nknkjyjx.htm</td>
-                <td>http://nknkjyjx.r.thetianfu.com/nknkjyjx.htm</td>
-                <td>否</td>
-                <td>2016-01-22 15:36:10</td>
-                <td><a href="index.php?m=admin_gamelink_addlink&plateid=58">修改</a></td>
-               </tr>
-                          </table>
-		</form>
-	</div>-->
-<!--	<div class="leshu_a_pageb">
-		<div class="leshu_a_page">
-		  <div class="leshu_a_page_left">共有 29 条信息 每页显示 10 条 共 3 页</div>
-		  <div class="leshu_a_page_right"> <a class="pagePrev" href="index.php?m=admin_gamelink&seltype=gamename&seltypevalue=%E4%B9%9D%E9%98%B4%E7%BB%9D%E5%AD%A6&page=2"> <b></b> </a><a href="index.php?m=admin_gamelink&seltype=gamename&seltypevalue=%E4%B9%9D%E9%98%B4%E7%BB%9D%E5%AD%A6&page=1">1</a> <a href="index.php?m=admin_gamelink&seltype=gamename&seltypevalue=%E4%B9%9D%E9%98%B4%E7%BB%9D%E5%AD%A6&page=2">2</a> <a class="current">3</a><a class="pageNext" href="index.php?m=admin_gamelink&seltype=gamename&seltypevalue=%E4%B9%9D%E9%98%B4%E7%BB%9D%E5%AD%A6&page=4"> <b></b> </a> </div>
-		</div>
-	</div>
-</div>-->
+            if (seltypevalue != '') {url += '&seltype='+seltype+'&seltypevalue='+encodeURIComponent(seltypevalue);}
+            if (starttime != '') {url += '&starttime='+starttime;}
+            if (endtime != '') {url += '&endtime='+endtime;}
+            if (nature != '') {url += '&nature='+nature;}
+            window.location.href=encodeURI(url);
+        }
+*/
+
+        var checkTag = 1; // 1:当前checkbox全部未选中 	2:全部选中
+        function checkall(){
+            if(checkTag == 1){
+                $("input[id^='checkid_']").attr("checked", true);
+                $("#checkhtml").html("全不选");
+                checkTag = 2;
+            }else{
+                $("input[id^='checkid_']").attr("checked", false);
+                $("#checkhtml").html("全选");
+                checkTag = 1;
+            }
+        }
+
+        function audit_recom(val){
+            //if(val!=1) { showError('参数不对'); return false; }
+            var delid = '';
+            var spe = "";
+            $("input[id^='checkid_']:checked").each(function(){
+                delid += spe + $(this).val();
+                spe = ",";
+            });
+            if(delid){
+                audit_recom_ok(delid);
+            }else{
+                alert('未选中任何数据');
+            }
+        }
+        function audit_recom_ok(val){
+            var url = '/index/tongji/delete/?server_id=';
+            location.href = url + val;
+            //$("#setaudit").submit();
+        }
+    </script>
+
 		<div> 
 			{% block content %}
 			{% endblock %}
 		</div>
-		<div class="fn_clear"></div>		<div id="runtime">		Copyright &copy 2012-2016 上海乐蜀信息技术有限公司		</div>		</div>	</td>
-  </tr>
+		<div class="fn_clear"></div>
+        <div id="runtime">
+            Copyright &copy 2012-2016 Jack OMServer
+        </div>
+    </td>
+    </tr>
 </table>
 </body>
-</html> 
+</html>
