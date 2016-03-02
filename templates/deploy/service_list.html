@@ -1,0 +1,36 @@
+{% extends "index.html" %}
+{% block content %}
+    <div class="page_function">
+        <div class="info">
+            <h3>服务列表：</h3>
+            <small>感谢您奔腾不息的工作</small>
+        </div>
+        <div class="exercise">
+            <a href="{% url "service_new" %}">新增服务类型</a>
+            <a href="{% url "save_scripts" %}">添加脚本</a>
+            <a href="{% url "service_install" %}">部署</a>
+        </div>
+    </div>
+    <div class="page_form">
+        <div class="page_tablekk table_list">
+            <!--<form action="index.php?m=admin_game_dele" method="post" name="setDell" id="setDell">-->
+            <table align="center" width="100%" border="0" cellspacing="0" cellpadding="0" id="contenttable">
+                <tr class="t" align="left">
+                    <td width="10%">ID</td>
+                    <td width="40%">软件名</td>
+                    <td width="40%">软件版本</td>
+                    <td width="10">操作</td>
+                </tr>
+                {% for service in object_service %}
+                <tr>
+                    <td>{{ service.id }}</td>
+                    <td>{{ service.name }}</td>
+                    <td>{{ service.version }}</td>
+                    <td><a href="{% url "service_edit" service.id %}">修改</a>
+                    <a href="{% url "service_delete" service.id %}">删除</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}

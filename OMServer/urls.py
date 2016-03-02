@@ -15,5 +15,6 @@ urlpatterns = patterns('',
     url(r'^accounts/logout/$', 'tools.views.logout'),
     url(r'^accounts/changepassword/$', 'tools.views.changepassword'),
     url(r'^index/$', 'tools.views.index'),
-    #url(r'^tongji/$', include('tongji.urls')),
+    url(r'^index/deploy/', include('deploy.urls')),
+
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

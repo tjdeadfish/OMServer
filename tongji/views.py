@@ -4,15 +4,15 @@ from tongji.models import ServerList
 from tongji.models import ContactForm
 from django.contrib.auth.decorators import login_required
 
-# Create your views here.
 
 @login_required
 def server_list(request, template_name='servers/server_list.html'):
     servers = ServerList.objects.all()
     data = {}
-    data['object_list'] = servers
+    data['object_server'] = servers
     data.update({'username': request.session['username']})
     return render(request, template_name, data)
+
 
 @login_required
 def server_create(request, template_name='servers/server_form.html'):
@@ -28,6 +28,7 @@ def server_create(request, template_name='servers/server_form.html'):
             return HttpResponse("Ip address is exist")
     return render(request, template_name, {'form': form, 'username': request.session['username']})
 
+
 @login_required
 def server_update(request, pk, template_name='servers/server_form.html'):
     server = get_object_or_404(ServerList, pk=pk)
@@ -36,6 +37,7 @@ def server_update(request, pk, template_name='servers/server_form.html'):
         form.save()
         return redirect('server_list')
     return render(request, template_name, {'form': form, 'username': request.session['username']})
+
 
 @login_required
 def server_delete(request, pk, template_name='servers/server_confirm_delete.html'):

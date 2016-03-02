@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'tools',
     'tongji',
     'db_manage',
+    'deploy',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -109,5 +110,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'images').replace('\\','/')
 #CKEDITOR_IMAGE_BACKEND = "pillow"
 
 #设置session有效期
-SESSION_COOKIE_AGE = 60*30
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+#SESSION_COOKIE_AGE = 60*30
+#SESSION_EXPIRE_AT_BROWSER_CLOSE = True

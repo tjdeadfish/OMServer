@@ -1,0 +1,7 @@
+{% extends "index.html" %}
+{% block content %}
+<form method="post">{% csrf_token %}
+    你确定要删除 "{{ object }}" ?
+    <input type="submit" value="删除" />
+</form>
+{% endblock %}

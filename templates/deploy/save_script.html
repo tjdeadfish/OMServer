@@ -1,0 +1,17 @@
+{% extends "index.html" %}
+{% block content %}
+    <h3>编写脚本</h3>
+<form action="/index/deploy/shell_script/" method="post">
+{% csrf_token %}
+<table>
+    <tr>
+        <p>脚本名: <input type="text" name="script_name"/></p>
+        <br/>
+        <p>脚本内容：</p>
+        <textarea name="script_content" rows="30" cols="100"></textarea>
+        <td><input type="submit" value="保存"/></td>
+    </tr>
+</table>
+
+</form>
+{% endblock %}

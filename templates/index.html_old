@@ -1,80 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 {% load bootstrap_toolkit %}
-<!DOCTYPE html>
-<html lang="en-us" >
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Site administration | Django site admin</title>
-<link rel="stylesheet" type="text/css" href="/static/admin/css/base.css" />
-<link rel="stylesheet" type="text/css" href="/static/admin/css/dashboard.css" />
-<!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="/static/admin/css/ie.css" /><![endif]-->
-
-<script type="text/javascript">window.__admin_media_prefix__ = "/static/admin/";</script>
-<script type="text/javascript">window.__admin_utc_offset__ = "0";</script>
-
-<meta name="robots" content="NONE,NOARCHIVE" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>leshu运维管理</title>
+    <link href="http://dev.pythonic.in/static/OMServer/css/style_css.css" rel="stylesheet" type="text/css" />
+    <script src="http://dev.pythonic.in/static/OMServer/js/base.js" type="text/javascript"></script>
 </head>
-<div id="container">
-    <!-- Header -->
-    <div id="header">
-        <div id="branding">
-        <h1 id="site-name"><a href="/index/">乐蜀运维平台</a></h1>
-        </div>
-        <div id="user-tools">
-                Welcome,
-                <strong>{{ username }}</strong>.
-                <a href="/accounts/changepassword/">Change password</a> /
-                <a href="/accounts/logout/">Log out</a>
 
-        </div>
-    </div>
-    <!-- END Header -->
-<body class=" dashboard">
-
-<div id="layout" class="pure-g">
-    <div class="sidebar pure-u-1 pure-u-md-1-4">
-        <div class="header">
-            <nav class="nav">
-                <ul class="nav-list">
-                    <li class="nav-item">
-                        <a class="pure-button" href="/tongji/">资产统计</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="pure-button" href="/deploy/">环境部署</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="pure-button" href="/admin/db_manage/">数据库管理</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="pure-button" href="/release/">代码发布</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="pure-button" href="/terminal/">终端</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="pure-button" href="/log_analyze/">日志分析</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="pure-button" href="/monitor">监控</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </div>
-
-    <div class="content pure-u-1 pure-u-md-3-4">
-        <div>
-            {% block content %}
-            {% endblock %}
-            <div class="footer">
-                <div class="pure-menu pure-menu-horizontal pure-menu-open">
-                    <ul>
-                        <li><a href="http://pythonic.in/about/">About Me</a></li>
-                        <li><a href="http://pythonic.in/Friendship/">Friendship</a></li>
-                        <li><a href="https://github.com/lvs071103/JackBlog">GitHub</a></li>
-                    </ul>
-                </div>
+<body>
+<div id="append_parent"></div>
+<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td height="50" colspan="2"><div id="head">
+            <!--<div id="logo"><img src="/style/logo.gif" width="180" height="50" /></div>-->
+            <div id="site-name"><a href="/index/">乐蜀运维平台</a></div>
+            <div id="tool">
+                welcome <strong>{{ username }}</strong>!&nbsp;&nbsp;
+                <a href="/accounts/changepassword/">Change password</a>&nbsp;&nbsp;
+                <a href="/accounts/logout/">Log out</a>&nbsp;&nbsp;&nbsp;
             </div>
         </div>
-    </div>
-</div>
+        </td>
+    </tr>
+    <tr>
+        <td width="180" id="page_left" height="100%" align="left" valign="top">
+            <!--左边-->
+            <div id="nav" class="scroll-pane">
+                <div class="title">
+                    <a href="/index/">管理首页</a></div>
+                <ul class="load menu">
+                    <li><a  href="/index/tongji/">资产统计</a></li>
+                    <li><a  href="/index/deploy/">环境部署</a></li>
+                    <li><a  href="/admin/db_manage/">数据库管理</a></li>
+                    <li><a  href="/release/">代码发布</a></li>
+                    <li><a  href="/terminal/">终端</a></li>
+                    <li><a  href="/log_analyze/">日志分析</a></li>
+                    <li><a  href="/monitor/">监控</a></li>
+                </ul>
+            </div>
+        </td>
+
+    <td height="100%" style="width:100%\9" align="left" valign="top">
+
+    <script type="text/javascript">
+
+/*        function selparklist() {
+            var seltype			= $.trim($("#seltype").val());
+            var seltypevalue	= $.trim($("#seltypevalue").val());
+            var starttime		= $.trim($("#starttime").val());
+            var endtime			= $.trim($("#endtime").val());
+            var nature			= $.trim($("#nature").val());
+            var url				= 'index.php?m=admin_gamelink';
+
+            if (seltypevalue != '') {url += '&seltype='+seltype+'&seltypevalue='+encodeURIComponent(seltypevalue);}
+            if (starttime != '') {url += '&starttime='+starttime;}
+            if (endtime != '') {url += '&endtime='+endtime;}
+            if (nature != '') {url += '&nature='+nature;}
+            window.location.href=encodeURI(url);
+        }
+*/
+
+        var checkTag = 1; // 1:当前checkbox全部未选中 	2:全部选中
+        function checkall(){
+            if(checkTag == 1){
+                $("input[id^='checkid_']").attr("checked", true);
+                $("#checkhtml").html("全不选");
+                checkTag = 2;
+            }else{
+                $("input[id^='checkid_']").attr("checked", false);
+                $("#checkhtml").html("全选");
+                checkTag = 1;
+            }
+        }
+
+        function audit_recom(val){
+            //if(val!=1) { showError('参数不对'); return false; }
+            var delid = '';
+            var spe = "";
+            $("input[id^='checkid_']:checked").each(function(){
+                delid += spe + $(this).val();
+                spe = ",";
+            });
+            if(delid){
+                audit_recom_ok(delid);
+            }else{
+                alert('未选中任何数据');
+            }
+        }
+        function audit_recom_ok(val){
+            var url = '/index/tongji/delete/?server_id=';
+            location.href = url + val;
+            //$("#setaudit").submit();
+        }
+    </script>
+
+		<div> 
+			{% block content %}
+			{% endblock %}
+		</div>
+		<div class="fn_clear"></div>
+        <div id="runtime">
+            Copyright &copy 2012-2016 Jack OMServer
+        </div>
+    </td>
+    </tr>
+</table>
 </body>
 </html>
