@@ -1,0 +1,30 @@
+{% extends "index.html" %}
+{% block content %}
+    <!-- List of uploaded documents -->
+    {% if scripts %}
+        {% csrf_token %}
+        <ul>
+        {% for script in scripts %}
+            <li>
+                <a href="{{ script.script_file.url }}">{{ script.script_file.name }}
+                <a href="{% url "file_update" script.id %}">edit</a>
+            </a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No scripts.</p>
+    {% endif %}
+
+        <!-- Upload form. Note enctype attribute! -->
+        <form action="{% url 'upload_scripts_list' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p>{{ form.non_field_errors }}</p>
+            <p>{{ form.script_file.label_tag }} {{ form.script_file.help_text }}</p>
+            <p>
+                {{ form.script_file.errors }}
+                {{ form.script_file }}
+            </p>
+            <p><input type="submit" value="Upload" /></p>
+        </form>
+{% endblock %}

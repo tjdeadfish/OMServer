@@ -1,0 +1,9 @@
+{% extends "index.html" %}
+{% block content %}
+<div>路径：{{ file }}</div>
+<form method="POST">{% csrf_token %}
+    <textarea name="content" rows="30" cols="80"> {{ content }}</textarea>
+    <br/>
+    <input type="submit" value="Save changes">
+</form>
+{% endblock %}

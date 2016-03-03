@@ -1,11 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from models import Service
 from models import ServiceForm
-from django.shortcuts import redirect, HttpResponse, get_object_or_404
+from django.shortcuts import redirect, HttpResponse, get_object_or_404, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from tongji.views import ServerList
+from models import UploadFile
+from forms import UploadFileForm
 import subprocess
-import os
+from django.core.urlresolvers import reverse
+from django.template import RequestContext
 
 
 # Create your views here.
@@ -84,23 +87,37 @@ def select_operate(request, template_name='deploy/operate2.html'):
 
 
 @login_required
-def save_scripts(request, template_name='deploy/save_script.html'):
-    data = {}
-    data['username'] = request.session['username']
-    if request.method == "POST":
-        #from django.core.files import File
-        script_name = request.POST.get('script_name')
-        print script_name
-        print os.getcwd()
-        f = open(script_name, 'w')
-        content = request.POST['script_content']
-        print content
+def edit_file(request, pk, template_name='deploy/file_update.html'):
+    file_all = UploadFile.objects.get(pk=pk)
+    file_path = file_all.script_file.path
+    content = file_all.script_file.read()
+    if request.method == 'POST':
+        from django.core.files import File
+        f = open(file_all.script_file.path, 'w')
+        content = request.POST['content']
         f.write(content)
-        f.close()
-        #f = File(f)
-        #file.source = f
-        #file.save()
-        data['script_content'] = content
-        data['script_name'] = script_name
+        f = File(f)
+        file_all.source = f
+        file_all.save()
 
-    return render(request, template_name, data)
+    return render_to_response(template_name, {'file': file_path, 'content': content,
+                                              'username': request.session['username']},
+                              context_instance=RequestContext(request))
+
+
+@login_required
+def upload_scripts(request):
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            new_script = UploadFile(script_file=request.FILES['script_file'])
+            new_script.save()
+            return HttpResponseRedirect(reverse('deploy.views.upload_scripts'))
+    else:
+        form = UploadFileForm()
+
+    scripts = UploadFile.objects.all()
+
+    return render_to_response('deploy/list.html', {'scripts': scripts, 'form': form,
+                                                   'username': request.session['username']},
+                              context_instance=RequestContext(request))

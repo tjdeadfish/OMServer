@@ -1,4 +1,3 @@
-#cat get_jdk_status.py
 #!/usr/bin/env python
 #coding=utf8
 
