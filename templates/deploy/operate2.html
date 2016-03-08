@@ -5,8 +5,9 @@
 {% csrf_token %}
 <table>
     <tr>
-        <p>设置下载路径：<input type="text" name="download_path"/></p>
-        <p>设置安装路径：<input type="text" name="target_path"/></p>
+        <p>软件包下载路径：<input type="text" name="download_path"/></p>
+        <p>软件安装路径：<input type="text" name="target_path"/></p>
+        <p>软件版本：<input type="text" name="soft_version"/></p>
 
         <td>选择服务器:</td>
         <td>
@@ -20,7 +21,7 @@
         <td>
             <select name="pick_service">
                 {% for service in object_service %}
-                <option value="{{ service.id }}">{{ service.name }}</option>
+                <option value="{{ service.id }}">{{ service.soft_name }}</option>
                 {% endfor %}
             </select>
         </td>
@@ -29,8 +30,13 @@
 </table>
 
 <div>
-    返回状态：<br/>
-    {{ task_process }}
+    <div>返回状态：</div>
+        <!--<textarea name="line" rows="10" cols="100">-->
+        {% for line in return_list %}
+            <div>{{ line }}</div>
+        {% endfor %}
+            <div>{{ task_process }}</div>
+        <!--</textarea>-->
 </div>
 
 </form>

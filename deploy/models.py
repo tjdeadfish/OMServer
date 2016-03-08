@@ -1,21 +1,19 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
-from django import forms
 
 # Create your models here.
 
 
 class Service(models.Model):
-    name = models.CharField(max_length=50)
-    version = models.CharField(max_length=50)
-
-
-class ServiceForm(forms.ModelForm):
-    class Meta:
-        model = Service
-        fields = "__all__"
+    soft_name = models.CharField(max_length=50)
+    script_type = models.CharField(max_length=50, default="")
+    fabric_task = models.CharField(max_length=50, default="")
+    fabric_path = models.CharField(max_length=150, default="")
+    fabric_script_name = models.CharField(max_length=50, default="")
+    local_bash_path = models.CharField(max_length=150, default="")
+    local_bash_name = models.CharField(max_length=50, default="")
 
 
 class UploadFile(models.Model):
-    script_file = models.FileField(upload_to='scripts/%Y/%m/%d')
+    script_file = models.FileField(upload_to='scripts')

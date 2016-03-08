@@ -7,7 +7,7 @@
         {% for script in scripts %}
             <li>
                 <a href="{{ script.script_file.url }}">{{ script.script_file.name }}
-                <a href="{% url "file_update" script.id %}">edit</a>
+                <a href="{% url "file_update" script.id %}">修改脚本内容</a>
             </a>
             </li>
         {% endfor %}
@@ -25,6 +25,6 @@
                 {{ form.script_file.errors }}
                 {{ form.script_file }}
             </p>
-            <p><input type="submit" value="Upload" /></p>
+            <p><input type="submit" value="上传" /></p>
         </form>
 {% endblock %}

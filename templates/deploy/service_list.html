@@ -2,13 +2,14 @@
 {% block content %}
     <div class="page_function">
         <div class="info">
-            <h3>服务列表：</h3>
+            <h3>环境部署：</h3>
             <small>感谢您奔腾不息的工作</small>
         </div>
         <div class="exercise">
             <a href="{% url "service_new" %}">新增服务类型</a>
             <a href="{% url "upload_scripts_list" %}">上传脚本</a>
-            <a href="{% url "service_install" %}">部署</a>
+            <a href="/init_sys/">初始化系统</a>
+            <a href="{% url "service_install" %}">软件安装</a>
         </div>
     </div>
     <div class="page_form">
@@ -16,18 +17,30 @@
             <!--<form action="index.php?m=admin_game_dele" method="post" name="setDell" id="setDell">-->
             <table align="center" width="100%" border="0" cellspacing="0" cellpadding="0" id="contenttable">
                 <tr class="t" align="left">
-                    <td width="10%">ID</td>
-                    <td width="40%">软件名</td>
-                    <td width="40%">软件版本</td>
-                    <td width="10">操作</td>
+                    <td width="5%">ID</td>
+                    <td width="10%">软件</td>
+                    <td width="8%">脚本类型</td>
+                    <td width="10%">fab任务</td>
+                    <td width="15%">fab路径</td>
+                    <td width="15%">fab脚本名</td>
+                    <td width="15%">本脚本路径</td>
+                    <td width="14%">本地脚本(包)</td>
+                    <td width="8%">操作</td>
                 </tr>
                 {% for service in object_service %}
                 <tr>
                     <td>{{ service.id }}</td>
-                    <td>{{ service.name }}</td>
-                    <td>{{ service.version }}</td>
-                    <td><a href="{% url "service_edit" service.id %}">修改</a>
-                    <a href="{% url "service_delete" service.id %}">删除</a></td>
+                    <td>{{ service.soft_name }}</td>
+                    <td>{{ service.script_type }}</td>
+                    <td>{{ service.fabric_task }}</td>
+                    <td>{{ service.fabric_path }}</td>
+                    <td>{{ service.fabric_script_name }}</td>
+                    <td>{{ service.local_bash_path }}</td>
+                    <td>{{ service.local_bash_name }}</td>
+                    <td>
+                        <a href="{% url "service_edit" service.id %}">修改</a>
+                        <a href="{% url "service_delete" service.id %}">删除</a>
+                    </td>
                 </tr>
                 {% endfor %}
             </table>
