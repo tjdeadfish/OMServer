@@ -92,14 +92,14 @@ def select_operate(request, template_name='deploy/operate2.html'):
                                             soft_version, local_bash_path, local_bash_name, fabric_name)],
                                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         return_code = task_process.poll()
-        return_list = []
+        #return_list = []
         while return_code is None:
             line = task_process.stdout.readline()
-            return_list.append(line)
+            #return_list.append(line)
             return_code = task_process.poll()
             line = line.strip()
             print line
-        data['return_list'] = return_list
+        #data['return_list'] = return_list
 
         if script_type == 'bash':
             if return_code == 0:

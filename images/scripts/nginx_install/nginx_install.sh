@@ -26,11 +26,11 @@ else
         else
                 exit 1
         fi
-        cp ../init.d/nginx /etc/init.d/nginx
+        cp ../nginx_install/init.d/nginx /etc/init.d/nginx
         chmod a+x /etc/init.d/nginx
         mv ${TARGET_PATH}/conf/nginx.conf ${TARGET_PATH}/conf/nginx.conf.old
-        cp ../conf/nginx.conf ${TARGET_PATH}/conf
-        /bin/cp -rf ../conf/vhosts ${TARGET_PATH}/conf/
+        cp ../nginx_install/conf/nginx.conf ${TARGET_PATH}/conf
+        /bin/cp -rf ../nginx_install/conf/vhosts ${TARGET_PATH}/conf/
         /etc/init.d/nginx start
         chkconfig --add nginx
         chkconfig nginx on
