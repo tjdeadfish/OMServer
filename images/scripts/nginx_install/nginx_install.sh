@@ -14,7 +14,7 @@ else
         tar zxvf nginx-${SOFT_VERSION}.tar.gz
         cd nginx-${SOFT_VERSION}
         echo "install nginx ..."
-        ./configure --prefix=${TARGET_PATH} --user=nobody \
+        ./configure --prefix=${TARGET_PATH}/nginx --user=nobody \
         --group=nobody --with-ld-opt=-ljemalloc --with-http_ssl_module \
         --with-http_addition_module --with-http_sub_module --with-http_dav_module \
         --with-http_flv_module --with-http_gzip_static_module --with-http_stub_status_module \

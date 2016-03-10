@@ -19,14 +19,14 @@
 # Check that networking is up.
 [ "$NETWORKING" = "no" ] && exit 0
 
-nginx="/data/lnmp/nginx/sbin/nginx"
+nginx="/data/softs/nginx/sbin/nginx"
 prog=$(basename $nginx)
 
 sysconfig="/etc/sysconfig/$prog"
 lockfile="/var/lock/subsys/nginx"
 pidfile="/var/run/${prog}.pid"
 
-NGINX_CONF_FILE="/data/lnmp/nginx/conf/nginx.conf"
+NGINX_CONF_FILE="/data/softs/nginx/conf/nginx.conf"
 
 [ -f $sysconfig ] && . $sysconfig
 
